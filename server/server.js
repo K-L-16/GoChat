@@ -38,15 +38,27 @@ io.on("connection", (socket) => {
 })
 
 //middleware setup
-app.use(express.json({ limit: '4mb' }))
 app.use(cors());
+app.use(express.json({ limit: '4mb' }))
+
 
 //routes setup
 app.use('/api/status', (req, res) => {
     res.send("server is live")
 })
 app.use("/api/auth", userRouter);
-app.use("/api/messages",messageRouter)
+app.use("/api/messages", messageRouter)
+
+//when the image is too big
+app.use((err, req, res, next) => {
+    if (err.type === 'entity.too.large' || err.status === 413) {
+        return res
+            .status(413)
+            .json({ success: false, message: 'Reach the limit for pic (4MB)' });
+    }
+    console.log(err.message);
+    res.status(500).json({ success: false, message: 'sorry something goes wrong' });
+});
 
 //connect to mongodb
 await connectDB();

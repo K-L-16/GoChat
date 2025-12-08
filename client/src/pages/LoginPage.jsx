@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import logoBig from '../assets/logo-big.png'
 import arrowIcon from '../assets/arrow.png'
+import { AuthContext } from '../../context/AuthContext'
 
 
 export default function LoginPage() {
@@ -11,6 +12,9 @@ export default function LoginPage() {
     const [password, setPassword] = useState('')
     const [bio, setBio] = useState('')
     const [isDataSubmitted, setisDataSubmitted] = useState(false)
+
+    const { login } = useContext(AuthContext);
+
     const onSubmitHandler = (event) => {
         event.preventDefault();
 
@@ -18,6 +22,8 @@ export default function LoginPage() {
             setisDataSubmitted(true)
             return
         }
+
+        login(currState==="Sign up" ? "signup" : 'login',{fullName, email,password,bio}) // call api
     }
 
     return (
@@ -55,9 +61,9 @@ export default function LoginPage() {
                 </button>
 
                 {
-                    currState === 'Sign up' && (
+                    currState === 'Sign up' &&  isDataSubmitted &&(
                         <div className='flex items-center gap-2 text-sm text-gr-500'>
-                            <input type="checkbox" />
+                            <input type="checkbox" required/>
                             <p>Agree to the terms of use & privacy policy</p>
                         </div>
                     )

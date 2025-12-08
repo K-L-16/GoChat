@@ -21,7 +21,7 @@ export const getUsersForSidebar = async (req,res) => {
         })
 
         await Promise.all(promises);//waite for all the awiate function running
-        res.json({ success: true, user: filteredUsers, unseenMessages})
+        res.json({ success: true, users: filteredUsers, unseenMessages})
     } catch(error) {
         console.log(error.message)
         res.json({ success: false, message: error.message})
@@ -75,11 +75,11 @@ export const sendMessage = async (req, res) => {
 
         let imageUrl;
         if (image) {
-            const uploadResponse = await cloudinary.uploader.upload(image)
+            const uploadResponse = await cloudinary.uploader.upload(image) //upload the image to the cloudinary
             imageUrl = uploadResponse.secure_url// get the url of the image
         }
 
-        const newMessage = Message.create({
+        const newMessage = await Message.create({
             senderId,
             receiverId,
             text,
