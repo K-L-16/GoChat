@@ -17,38 +17,63 @@ export default function RightSidebar() {
         )
     },[messages])
     return selectedUser && (
-        <div className={`bg-[#8185B2]/10 text-white w-full relative overflow-y-scroll
-            ${selectedUser ? 'max-md:hidden' : ''}`}>
+        <div
+            className={`relative w-full h-full bg-[#f7f7fb] text-slate-900 border-l border-gray-100 flex flex-col
+    ${selectedUser ? 'max-md:hidden' : ''}`}
+        >
+
             
-            <div className='pt-16 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
-                <img src={selectedUser?.profilePic || personIcon} alt="" className='w-20 aspect-square rounded-full ' />
-                <h1 className='px-10 text-xl font-medium mx-auto flex items-center'>
-                    {onlineUsers.includes(selectedUser._id) && <p className='w-2 h-2 rounded-full bg-green-500'></p>}
-                    {selectedUser.fullName}
-                </h1>
-                <p className='px-10 mx-auto'>{selectedUser.bio}</p>
+            <div className="px-5 pt-10 pb-6">
+                <div className="bg-white rounded-2xl px-5 py-6 flex flex-col items-center gap-2 shadow-sm">
+                    <img
+                        src={selectedUser?.profilePic || personIcon}
+                        alt=""
+                        className="w-20 aspect-square rounded-full object-cover"
+                    />
+                    <h1 className="text-base font-semibold flex items-center gap-2">
+                        {onlineUsers.includes(selectedUser._id) && (
+                            <span className="w-2 h-2 rounded-full bg-green-500" />
+                        )}
+                        {selectedUser.fullName}
+                    </h1>
+                    <p className="text-xs text-gray-500 text-center">
+                        {selectedUser.bio}
+                    </p>
+                </div>
             </div>
 
-            <hr className='border-[#fffff50] my-4' />
+
+            <hr className="border-gray-200 mx-5" />
+
             
 
             <div className='px-5 text-xs'>
-                <p>Img History</p>
+                <p className='text-black'>Img History</p>
                 <div className='mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-80'>
                     {msgImages.map((url, index) => (
                         <div key={index} onClick={() => window.open(url)} className='cursor-pointer rounded'>
-                            <img src={url} alt="" className='h-full rounded-md'/>
+                            <img src={url} alt="" className='w-20 h-15 rounded-md object-cover '/>
                         </div>
                     ))}
 
                 </div>
             </div>
 
-            <button onClick={()=>logout()} className="absolute bottom-5 left-1/2 transform -translate-x-1/2
-                bg-linear-to-r from-purple-400 via-violet-600 to-purple-700
-             text-white text-sm font-light py-2 px-20 rounded-full cursor-pointer">
-                Logout
-            </button>
+            <div className="px-5 py-4 border-t border-gray-100 bg-[#f7f7fb] mt-auto">
+                <button
+                    onClick={() => logout()}
+                    className="w-full flex items-center justify-center gap-2
+    rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500
+    text-white text-sm font-semibold tracking-wide
+    py-2.5 shadow-md shadow-violet-200
+    hover:shadow-lg hover:brightness-110 active:scale-[0.98]
+    transition-all duration-150 cursor-pointer"
+                >
+                    Logout
+                </button>
+
+            </div>
+
 
         </div>
     )

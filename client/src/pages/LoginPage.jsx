@@ -27,60 +27,115 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="min-h-screen bg-cover bg-cent flex items-center justify-center gap-8 sm:justify-evenly max-sm:flex-col backdrop-blur-2xl" >
-            {/* left  */}
-            <img src={logoBig} alt="" className='w-[min(30vw,250px)]' />
-            {/* right */}
-            <form  onSubmit={onSubmitHandler} action="" className='border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg'>
-                <h2 className='font-medium text-2xl flex justify-between items-center '>
-                    {currState}
-                    {isDataSubmitted && <img onClick={()=>setisDataSubmitted(false)} src={arrowIcon} alt="" className='w-5 cursor-pointer' />}
-                    
+        <div className="min-h-screen flex flex-col sm:flex-row">
+            <div className="flex-1 bg-black flex items-center justify-center">
+                <img src={logoBig} alt="" className="w-[min(30vw,250px)]" />
+            </div>
 
-                </h2>
-                {currState === 'Sign up' && !isDataSubmitted &&(
-                    <input onChange={(e) => setFullName(e.target.value)} value={fullName} type="text" className='p-2 border border-gray-500 rounded-md focus:outline-none' placeholder='Full Name' required />
-                )}
-                {!isDataSubmitted && (
-                    <>
-                        <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder='Email' required className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'/>
+            <div className="flex-1 bg-white flex items-center justify-center">
+                <form
+                    onSubmit={onSubmitHandler}
+                    action=""
+                    className="border-2 bg-white text-black border-gray-300 p-6 flex flex-col gap-6 rounded-lg shadow-lg"
+                >
+                    <h2 className="font-medium text-2xl flex justify-between items-center">
+                        {currState}
+                        {isDataSubmitted && (
+                            <img
+                                onClick={() => setisDataSubmitted(false)}
+                                src={arrowIcon}
+                                alt=""
+                                className="w-5 cursor-pointer"
+                            />
+                        )}
+                    </h2>
 
-                        <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder='Password' required className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'/>
+                    {currState === "Sign up" && !isDataSubmitted && (
+                        <input
+                            onChange={(e) => setFullName(e.target.value)}
+                            value={fullName}
+                            type="text"
+                            className="p-2 border border-gray-500 rounded-md focus:outline-none"
+                            placeholder="Full Name"
+                            required
+                        />
+                    )}
 
-                    </>
-                )}
+                    {!isDataSubmitted && (
+                        <>
+                            <input
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                type="email"
+                                placeholder="Email"
+                                required
+                                className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            />
 
-                {
-                    currState === 'Sign up' && isDataSubmitted && (
-                        <textarea onChange={(e)=>setBio(e.target.value)} value={bio} row={4}  name="" id="" className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' placeholder='Introduce yourself...' required></textarea>
-                    )
-                }
+                            <input
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                type="password"
+                                placeholder="Password"
+                                required
+                                className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            />
+                        </>
+                    )}
 
-                <button className='py-3 bg-linear-to-r from-purple-400 to-violet-600 text-white rounded-md cursor-pointer'>
-                    {currState == 'Sign up' ? 'Create Account': 'Login Now'}
-                </button>
+                    {currState === "Sign up" && isDataSubmitted && (
+                        <textarea
+                            onChange={(e) => setBio(e.target.value)}
+                            value={bio}
+                            rows={4}
+                            className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="Introduce yourself..."
+                            required
+                        ></textarea>
+                    )}
 
-                {
-                    currState === 'Sign up' &&  isDataSubmitted &&(
-                        <div className='flex items-center gap-2 text-sm text-gr-500'>
-                            <input type="checkbox" required/>
+                    <button className="py-3 bg-linear-to-r from-purple-400 to-violet-600 text-white rounded-md cursor-pointer">
+                        {currState === "Sign up" ? "Create Account" : "Login Now"}
+                    </button>
+
+                    {currState === "Sign up" && isDataSubmitted && (
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <input type="checkbox" required />
                             <p>Agree to the terms of use & privacy policy</p>
                         </div>
-                    )
-                }
-
-                
-                <div className='flex flex-col gap-2'>
-                    {currState === 'Sign up' ? (
-                        <p className='text-sm text-black'>Already have an account? <span onClick={() => { setCurrState('Login'); setisDataSubmitted(false)}} className='font-medium text-violet-500 cursor-pointer'>Login here</span></p>
-                    ) : (
-                            <p className='text-sm text-black'>Create an account <span onClick={() => { setCurrState('Sign up')}} className='font-medium text-violet-500 cursor-pointer'>Click here</span></p>
                     )}
-                </div>
-                
-            
-            </form>
-            
+
+                    <div className="flex flex-col gap-2">
+                        {currState === "Sign up" ? (
+                            <p className="text-sm text-black">
+                                Already have an account?{" "}
+                                <span
+                                    onClick={() => {
+                                        setCurrState("Login");
+                                        setisDataSubmitted(false);
+                                    }}
+                                    className="font-medium text-violet-500 cursor-pointer"
+                                >
+                                    Login here
+                                </span>
+                            </p>
+                        ) : (
+                            <p className="text-sm text-black">
+                                Create an account{" "}
+                                <span
+                                    onClick={() => {
+                                        setCurrState("Sign up");
+                                    }}
+                                    className="font-medium text-violet-500 cursor-pointer"
+                                >
+                                    Click here
+                                </span>
+                            </p>
+                        )}
+                    </div>
+                </form>
+            </div>
         </div>
     )
+
 }
