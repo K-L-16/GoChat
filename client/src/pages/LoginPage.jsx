@@ -101,7 +101,7 @@ export default function LoginPage() {
                     {currState === "Sign up" && isDataSubmitted && (
                         <div className="flex items-center gap-2 text-sm text-gray-500">
                             <input type="checkbox" required />
-                            <p>Agree to the terms of use & privacy policy</p>
+                            <p>I understand this is a demo app and my data may be deleted.</p>
                         </div>
                     )}
 
